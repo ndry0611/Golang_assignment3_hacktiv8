@@ -13,10 +13,6 @@ type Weather struct {
 	Wind int `json:"wind"`
 }
 
-type Response struct {
-	Status Weather `json:"status"`
-}
-
 func (w *Weather) checkStatus() (resWater string, resWind string) {
 	switch {
 	case w.Water <= 5:
@@ -39,9 +35,8 @@ func (w *Weather) checkStatus() (resWater string, resWind string) {
 }
 
 func generateJSON(weather *Weather) {
-	stat := Response{Status: *weather}
 
-	res, err := json.Marshal(&stat)
+	res, err := json.Marshal(&weather)
 
 	if err != nil {
 		log.Fatal(err.Error())
